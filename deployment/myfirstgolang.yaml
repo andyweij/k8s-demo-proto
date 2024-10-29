@@ -1,7 +1,7 @@
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: demo-proto-ns
+#apiVersion: v1
+#kind: Namespace
+#metadata:
+#  name: demo-proto-ns
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: demo-go-container
-          image: andyglen/myfirstgolang:v3
+          image: andyglen/myfirstgolang:v4
           ports:
             - containerPort: 8000
 ---
