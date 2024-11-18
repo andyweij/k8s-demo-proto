@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: demo-go-container
-          image: andyglen/myfirstgolang:v4
+          image: andyglen/myfirstgolang:v5
           ports:
             - containerPort: 8000
 ---
