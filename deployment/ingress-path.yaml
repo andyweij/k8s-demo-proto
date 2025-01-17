@@ -1,69 +1,25 @@
-#apiVersion: networking.k8s.io/v1
-#kind: Ingress
-#metadata:
-#  name: ingress-path
-#  namespace: demo-proto-ns
-#spec:
-#  ingressClassName: nginx
-#  rules:
-#    - host: localhost
-#    - http:
-#        paths:
-#          - pathType: Prefix
-#            path: /testAPI
-#            backend:
-#              service:
-#                name: demo-proto-service-clusterip
-#                port:
-#                  number: 8081
-#          - pathType: Prefix
-#            path: /goAPI
-#            backend:
-#              service:
-#                name: demo-go-service-clusterip
-#                port:
-#                  number: 8081
----
-apiVersion: networking.istio.io/v1beta1
-kind: Gateway
+apiVersion: networking.k8s.io/v1
+kind: Ingress
 metadata:
-  name: demo-proto-gateway
+  name: ingress-path
   namespace: demo-proto-ns
 spec:
-  selector:
-    istio: ingressgateway # 使用 Istio 的預設 Ingress Gateway
-  servers:
-    - port:
-        number: 80
-        name: http
-        protocol: HTTP
-      hosts:
-        - "*"
----
-apiVersion: networking.istio.io/v1beta1
-kind: VirtualService
-metadata:
-  name: demo-proto-vs
-  namespace: demo-proto-ns
-spec:
-  hosts:
-    - "*"
-  gateways:
-    - demo-proto-gateway
-  http:
-    - match:
-        - uri:
-            prefix: /testAPI
-      route:
-        - destination:
-            host: demo-proto-service-clusterip.demo-proto-ns.svc.cluster.local
-            port:
-              number: 8081
-    - match:
-        - uri:
-            prefix: /goAPI
-      route:
-        - destination:
-            host: demo-go-service-clusterip.demo-proto-ns.svc.cluster.local
-            port:
-              number: 8081
+  ingressClassName: nginx
+  rules:
+    - host: localhost
+    - http:
+        paths:
+          - pathType: Prefix
+            path: /testAPI
+            backend:
+              service:
+                name: demo-proto-service-clusterip
+                port:
+                  number: 8081
+          - pathType: Prefix
+            path: /goAPI
+            backend:
+              service:
+                name: demo-go-service-clusterip
+                port:
+                  number: 8081
