@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: demo-java-container
-          image: andyglen/demowithproto:v10
+          image: andyglen/demoprotohsts:v1
           ports:
             - containerPort: 8082
 #        volumeMounts:
